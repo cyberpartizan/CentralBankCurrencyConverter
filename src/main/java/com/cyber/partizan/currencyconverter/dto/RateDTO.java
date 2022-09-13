@@ -6,7 +6,7 @@ import lombok.Data;
 
 @JacksonXmlRootElement(localName = "Valute")
 @Data
-public class CurrencyDTO {
+public class RateDTO {
     @JacksonXmlProperty(localName = "ID", isAttribute = true)
     private String id;
 

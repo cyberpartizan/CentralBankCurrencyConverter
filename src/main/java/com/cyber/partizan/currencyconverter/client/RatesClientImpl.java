@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.cyber.partizan.currencyconverter.utils.DateUtils.RUSSIAN_DATE_FORMATTER;
+import static com.cyber.partizan.currencyconverter.utils.DateUtils.SLASH_DATE_FORMATTER;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Service
@@ -31,17 +31,10 @@ public class RatesClientImpl implements RatesClient {
     private final static String DAILY_RATES_URL = cbrUrl + "XML_daily.asp";
     private final static String DATE_PARAM_NAME = "date_req";
 
-
-    @Override
-    public CurrencyRatesDTO getRates() {
-        LocalDate now = LocalDate.now();
-        return getRates(now);
-    }
-
     @Override
     public CurrencyRatesDTO getRates(LocalDate date) {
 
-        String formattedDate = date.format(RUSSIAN_DATE_FORMATTER);
+        String formattedDate = date.format(SLASH_DATE_FORMATTER);
         Map<String, String> parameters = Collections.singletonMap(DATE_PARAM_NAME, formattedDate);
 
         Request query = getRequest(DAILY_RATES_URL, parameters);

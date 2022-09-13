@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import java.time.LocalDate;
 
 public interface RatesClient {
-    CurrencyRatesDTO getRates();
 
     @SneakyThrows
     CurrencyRatesDTO getRates(LocalDate date);

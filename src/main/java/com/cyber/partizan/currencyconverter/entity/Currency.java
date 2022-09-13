@@ -22,12 +22,18 @@ public class Currency {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "nominal", nullable = false)
-    private int nominal = 1;
-
     @Column(name = "num_code", nullable = false)
     private String numCode;
 
     @Column(name = "charCode", nullable = false)
     private String charCode;
+
+    public static Currency getRubCurrency(){
+        var rub = new Currency();
+        rub.setCharCode("RUB");
+        rub.setId("R00000");
+        rub.setName("Российский рубль");
+        rub.setNumCode("643");
+        return rub;
+    }
 }

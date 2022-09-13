@@ -20,6 +20,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Table(name = "rates")
 public class Rate {
+
+    public static final float rateMultiplier = 10000F;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -30,9 +33,22 @@ public class Rate {
     private Currency currency;
 
     @Column(name = "value", nullable = false)
-    private Long value;
+    private Integer value;
+
+    @Column(name = "nominal", nullable = false)
+    private Integer nominal = 1;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
+
+    public static Rate getRubRate(LocalDate date) {
+        var rubCurrency = Currency.getRubCurrency();
+        var rate = new Rate();
+        rate.setCurrency(rubCurrency);
+        rate.setDate(date);
+        rate.setNominal(1);
+        rate.setValue(10000);
+        return rate;
+    }
 
 }
