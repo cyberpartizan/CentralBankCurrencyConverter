@@ -1,8 +1,5 @@
 package com.cyber.partizan.currencyconverter.config;
 
-
-import com.cyber.partizan.currencyconverter.entity.Role;
-import com.cyber.partizan.currencyconverter.repository.UserRepository;
 import com.cyber.partizan.currencyconverter.security.JWTFilter;
 import com.cyber.partizan.currencyconverter.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;

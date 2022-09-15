@@ -37,7 +37,7 @@ public class AuthController {
         newUser.setHash(hash);
         newUser = userService.save(newUser);
         String token = jwtUtil.generateToken(newUser.getUsername());
-        return Collections.singletonMap("jwt-token", token);
+        return Collections.singletonMap("jwt", token);
     }
 
     @PostMapping("/login")
@@ -46,7 +46,7 @@ public class AuthController {
             var authInputToken = new UsernamePasswordAuthenticationToken(credits.getUsername(), credits.getPassword());
             authManager.authenticate(authInputToken);
             String token = jwtUtil.generateToken(credits.getUsername());
-            return Collections.singletonMap("jwt-token", token);
+            return Collections.singletonMap("jwt", token);
         } catch (AuthenticationException authExc) {
             throw new RuntimeException("Invalid Login Credentials");
         }

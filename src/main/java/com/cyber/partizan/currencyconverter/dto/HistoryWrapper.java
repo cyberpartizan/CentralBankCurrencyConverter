@@ -2,6 +2,7 @@ package com.cyber.partizan.currencyconverter.dto;
 
 import com.cyber.partizan.currencyconverter.utils.LocalDateDeserializer;
 import com.cyber.partizan.currencyconverter.utils.LocalDateSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
@@ -14,13 +15,17 @@ public class HistoryWrapper {
 
     private Long id;
 
+    @JsonProperty("source_currency")
     private CurrencyWrapper sourceCurrency;
 
+    @JsonProperty("target_currency")
     private CurrencyWrapper targetCurrency;
 
-    private Long sourceAmount;
+    @JsonProperty("source_amount")
+    private Float sourceAmount;
 
-    private Long targetAmount;
+    @JsonProperty("target_amount")
+    private Float targetAmount;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

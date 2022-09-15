@@ -1,5 +1,6 @@
 package com.cyber.partizan.currencyconverter.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +9,6 @@ import lombok.Setter;
 public class CurrencyWrapper {
     private String id;
 
-    private String name;
+    @JsonProperty("char_code")
+    private String charCode;
 }
