@@ -1,8 +1,8 @@
 package com.cyber.partizan.currencyconverter.client;
 
 import com.cyber.partizan.currencyconverter.dto.CurrencyRatesDTO;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,14 +19,19 @@ import java.util.Map;
 import static com.cyber.partizan.currencyconverter.utils.DateUtils.SLASH_DATE_FORMATTER;
 
 @Service
-@RequiredArgsConstructor
 public class RatesClientImpl implements RatesClient {
 
-    private final XmlMapper objectMapper;
+
+    private final ObjectMapper objectMapper;
     private final HttpClient client;
     public final static String CBR_URL = "https://cbr.ru/scripts/";
     private final static String DAILY_RATES_URL = CBR_URL + "XML_daily.asp";
     private final static String DATE_PARAM_NAME = "date_req";
+
+    public RatesClientImpl(@Qualifier("objectXmlMapper") ObjectMapper objectMapper, HttpClient client) {
+        this.objectMapper = objectMapper;
+        this.client = client;
+    }
 
     @Override
     public CurrencyRatesDTO getRates(LocalDate date) {
@@ -34,7 +39,7 @@ public class RatesClientImpl implements RatesClient {
         String formattedDate = date.format(SLASH_DATE_FORMATTER);
         Map<String, String> parameters = Collections.singletonMap(DATE_PARAM_NAME, formattedDate);
 
-        HttpRequest request = getRequest(DAILY_RATES_URL, parameters);
+        HttpRequest request = GETRequest(DAILY_RATES_URL, parameters);
 
         String response;
         try {
@@ -45,7 +50,7 @@ public class RatesClientImpl implements RatesClient {
         }
     }
 
-    private HttpRequest getRequest(String path, Map<String, String> parameters) {
+    private HttpRequest GETRequest(String path, Map<String, String> parameters) {
         return request("GET", HttpRequest.BodyPublishers.noBody(), path, parameters);
     }
 

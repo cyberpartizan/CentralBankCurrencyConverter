@@ -17,8 +17,8 @@ public class UtilConfig {
         return HttpClient.newHttpClient();
     }
 
-    @Bean
-    public XmlMapper objectMapperXml() {
+    @Bean("objectXmlMapper")
+    public ObjectMapper objectMapperXml() {
         return new XmlMapper();
     }
 
