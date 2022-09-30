@@ -26,10 +26,11 @@ public class ConversionHistoryController {
     private final ConversionHistoryMapper conversionHistoryMapper;
 
     @GetMapping("/pair")
-    public List<HistoryWrapper> getHistory(@RequestParam @DateTimeFormat(pattern = DOT_PATTERN) LocalDate date,
+    public List<HistoryWrapper> getHistory(@RequestParam @DateTimeFormat(pattern = DOT_PATTERN) LocalDate fromDate,
+                                           @RequestParam @DateTimeFormat(pattern = DOT_PATTERN) LocalDate toDate,
                                            @RequestParam("from_currency_id") @NotEmpty String fromCurrencyId,
                                            @RequestParam("to_currency_id") @NotEmpty String toCurrencyId) {
-        List<ConversionHistory> history = conversionHistoryService.findHistory(date, fromCurrencyId, toCurrencyId);
+        List<ConversionHistory> history = conversionHistoryService.findHistory(fromDate, toDate, fromCurrencyId, toCurrencyId);
         return conversionHistoryMapper.toWrapperList(history);
     }
 }

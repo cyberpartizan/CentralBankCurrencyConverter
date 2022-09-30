@@ -5,8 +5,6 @@ import com.cyber.partizan.currencyconverter.repository.ConversionHistoryReposito
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class ConversionHistoryServiceImpl implements ConversionHistoryService {
     }
 
     @Override
-    public List<ConversionHistory> findHistory(@NotNull LocalDate date, @NotEmpty String fromCurrencyId, @NotEmpty String toCurrencyId) {
-        return conversionHistoryRepository.findHistory(date, fromCurrencyId, toCurrencyId);
+    public List<ConversionHistory> findHistory(LocalDate fromDate, LocalDate toDate, String fromCurrencyId, String toCurrencyId) {
+        return conversionHistoryRepository.findHistory(fromDate, toDate, fromCurrencyId, toCurrencyId);
     }
 }

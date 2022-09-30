@@ -12,9 +12,9 @@ import java.util.List;
 public interface ConversionHistoryRepository extends JpaRepository<ConversionHistory, Long> {
 
     @Query("SELECT ch FROM ConversionHistory ch " +
-            "WHERE ch.date = :date " +
+            "WHERE ch.date BETWEEN :fromDate AND :toDate " +
             "AND ch.sourceCurrency.id = :sourceId " +
             "AND ch.targetCurrency.id = :targetId ")
-    List<ConversionHistory> findHistory(LocalDate date, String sourceId, String targetId);
+    List<ConversionHistory> findHistory(LocalDate fromDate, LocalDate toDate, String sourceId, String targetId);
 
 }
