@@ -2,7 +2,6 @@ package com.cyber.partizan.currencyconverter.controller;
 
 
 import com.cyber.partizan.currencyconverter.dto.LoginCredits;
-import com.cyber.partizan.currencyconverter.dto.UserWrapper;
 import com.cyber.partizan.currencyconverter.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +20,8 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public Map<String, Object> register(@RequestBody @Valid UserWrapper userWrapper) {
-       return authService.registerHandler(userWrapper);
+    public Map<String, Object> register(@RequestBody @Valid LoginCredits credits) {
+       return authService.registerHandler(credits);
     }
 
     @PostMapping("/login")

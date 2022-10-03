@@ -1,7 +1,6 @@
 package com.cyber.partizan.currencyconverter.service;
 
 import com.cyber.partizan.currencyconverter.dto.LoginCredits;
-import com.cyber.partizan.currencyconverter.dto.UserWrapper;
 import com.cyber.partizan.currencyconverter.entity.AppUser;
 import com.cyber.partizan.currencyconverter.utils.JWTUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +23,9 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Map<String, Object> registerHandler(UserWrapper userWrapper) {
-        String hash = passwordEncoder.encode(userWrapper.getPassword());
-        var newUser = new AppUser(null, userWrapper.getUsername(), hash);
+    public Map<String, Object> registerHandler(LoginCredits credits) {
+        String hash = passwordEncoder.encode(credits.getPassword());
+        var newUser = new AppUser(null, credits.getUsername(), hash);
         newUser.setHash(hash);
         newUser = userService.save(newUser);
         String token = jwtUtil.generateToken(newUser.getUsername());
