@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
@@ -35,5 +36,18 @@ public class Currency {
         rub.setName("Российский рубль");
         rub.setNumCode("643");
         return rub;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Currency currency = (Currency) o;
+        return name.equals(currency.name) && numCode.equals(currency.numCode) && charCode.equals(currency.charCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, numCode, charCode);
     }
 }
